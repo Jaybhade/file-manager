@@ -47,8 +47,13 @@
 
 @media only screen and (max-width: 600px) {
   .brd117Breadcrumb {
+    border: 1px solid grey;
+    border-radius: 10px;
     position: absolute;
-    bottom: 5px;
+    bottom: 0px;
+    background-color: white;
+    width: 80%;
+    z-index: 1;
   }
 
   .brd117Breadcrumb div {

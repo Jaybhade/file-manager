@@ -18,8 +18,16 @@
 
 @media only screen and (max-width: 600px) {
     .fsc160FolderScreenParent {
-        margin-top: 70px;
         margin-left: 10px;
         display: flex;
+    }
+
+    .fsc162Scrollable {
+        margin-top: 100px;
+    }
+
+    .fsc163BottomSpace {
+        height: 1200px;
+        width: 100px;
     }
 }

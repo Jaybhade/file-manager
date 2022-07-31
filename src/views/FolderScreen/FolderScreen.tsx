@@ -118,6 +118,7 @@ const FolderScreen = (props: AppProps) => {
             <span onClick={props.showCreateFolderModal}>
               <AddFolder />
             </span>
+            <div className="fsc163BottomSpace">.</div>
           </div>
         </div>
       )}
