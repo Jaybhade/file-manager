@@ -1,17 +1,25 @@
 .fsc160FolderScreenParent {
-    height: 100vh;
-    width: 100%;
+  height: 100vh;
+  width: 100%;
 }
 
 .fsc161SearchBar {
-    position: absolute;
-    padding: 10px 16px;
-    top: 16px;
-    right: 16px;
-    z-index: 100;
+  position: absolute;
+  padding: 10px 16px;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
 }
 
 .fsc162Scrollable {
-    height: 90vh;
-    overflow-y: scroll;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+@media only screen and (max-width: 600px) {
+    .fsc160FolderScreenParent {
+        margin-top: 70px;
+        margin-left: 10px;
+        display: flex;
+    }
 }

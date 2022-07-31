@@ -23,20 +23,20 @@ const Breadcrumb = (props: AppProps) => {
     <ul className="brd117Breadcrumb">
       {backUrl ? (
         <Link to={backUrl}>
-          <li className="brd118NavigateBack">⬆</li>
+          <div className="brd118NavigateBack">⬆</div>
         </Link>
       ) : (
-        <li className="brd118NavigateBack disable">⬆</li>
+        <div className="brd118NavigateBack disable">⬆</div>
       )}
-      <span className="list">
+      <span className="brd222List">
         {urlArray.map((data: any) => {
           return (
             <React.Fragment key={data.url}>
-              <li> / </li>
+              <div> / </div>
               <Link to={data.url}>
-                <li className={props.url !== data.url ? "brd119MakeLight" : ""}>
+                <div className={props.url !== data.url ? "brd119MakeLight" : ""}>
                   {data.name}
-                </li>
+                </div>
               </Link>
             </React.Fragment>
           );

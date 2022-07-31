@@ -1,37 +1,39 @@
-ul.brd117Breadcrumb {
+.brd117Breadcrumb {
   padding: 10px 16px;
-  list-style: none;
-}
-
-ul.brd117Breadcrumb li {
-  display: inline;
+  display: flex;
   font-size: 22px;
 }
 
-ul.brd117Breadcrumb li + li:before {
-  padding: 8px;
-  color: black;
-}
-
-ul.brd117Breadcrumb li a {
-  color: #0275d8;
-  text-decoration: none;
-}
-
-ul.brd117Breadcrumb li a:hover {
-  color: #01447e;
-  text-decoration: underline;
+.brd117Breadcrumb div {
+  padding: 5px;
 }
 
 .brd119MakeLight {
-    color: grey;
+  color: grey;
 }
 
 .brd118NavigateBack {
-    border: 1px grey solid;
-    padding: 5px;
-    margin-right: 30px;
-    border-radius: 100px;
+  border: 1px grey solid;
+  padding: 5px;
+  margin-right: 30px;
+  border-radius: 100px;
+}
+
+.brd222List {
+  display: flex;
+  white-space: nowrap;
+  overflow: scroll;
+  max-width: 50vw;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.brd222List {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.brd222List::-webkit-scrollbar{
+  display: none;
 }
 
 .no-pointer-events {
@@ -41,4 +43,23 @@ ul.brd117Breadcrumb li a:hover {
 .disable {
   opacity: 0.3;
   cursor: default;
+}
+
+@media only screen and (max-width: 600px) {
+  .brd117Breadcrumb {
+    position: absolute;
+    bottom: 5px;
+  }
+
+  .brd117Breadcrumb div {
+    padding: 2px;
+  }
+
+  .brd222List {
+    max-width: 78vw;
+  }
+
+  .brd118NavigateBack {
+    padding: 2px;
+  }
 }

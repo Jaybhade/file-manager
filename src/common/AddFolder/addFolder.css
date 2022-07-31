@@ -1,25 +1,33 @@
 .adf115AddFolderParent {
-    cursor: pointer;
-    float: left;
-    margin: 0 15px 15px 15px;
+  cursor: pointer;
+  float: left;
+  margin: 0 15px 15px 15px;
 }
 
 .adf116AddFolder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 130px;
-    height: 85px;
-    margin: 0 auto;
-    margin-top: 50px;
-    margin-left: 20px;
-    position: relative;
-    border: 4px dotted grey;
-    color: grey;
-    font-size: xx-large;
-    border-radius: 6px 6px 6px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 85px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-left: 20px;
+  position: relative;
+  border: 4px dotted grey;
+  color: grey;
+  font-size: xx-large;
+  border-radius: 6px 6px 6px 6px;
 }
 
 .adf116AddFolder:hover {
-    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.59);
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.59);
+}
+
+@media only screen and (max-width: 600px) {
+  .adf116AddFolder {
+    width: 130px;
+    margin-left: 8px;
+    height: 80px;
+  }
 }

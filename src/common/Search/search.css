@@ -1,48 +1,57 @@
 .src138SearchInput {
-    border-radius: 10px;
-    padding : 10px 0 10px 35px;
-    font-size: 18px;
-    position: relative;
-    width: 300px;
+  border-radius: 10px;
+  padding: 10px 0 10px 35px;
+  font-size: 18px;
+  position: relative;
+  width: 300px;
 }
 
 .src142Image {
-    position: absolute;
-    top: 18px;
-    left: 20px;
-    z-index: 100;
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  z-index: 100;
 }
 
 .src144SearchResultParent {
-    cursor: pointer;
-    padding: 10px 0 10px 15px;
-    margin: 10px 0 10px 0;
-    border: 1px solid grey;
-    border-radius: 10px;
-    background-color: var(--grey-background);
+  cursor: pointer;
+  padding: 10px 0 10px 15px;
+  margin: 10px 0 10px 0;
+  border: 1px solid grey;
+  border-radius: 10px;
+  background-color: var(--grey-background);
 }
 
 .src144SearchResultParent:hover {
-    box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
 }
 
 .src141SearchResultPath {
-    color: grey;
-    overflow-y: scroll;
-    max-width: 300px;
+  color: grey;
+  overflow-y: scroll;
+  max-width: 300px;
 }
 
 .src139SearchResultList {
-    height: 91vh;
-    overflow-y: scroll;
+  height: 91vh;
+  overflow-y: scroll;
 }
 
-.src139SearchResultList::-webkit-scrollbar, .search-result-path::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .src139SearchResultList, .src141SearchResultPath {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+.src139SearchResultList::-webkit-scrollbar {
+  display: none;
+}
+
+.src141SearchResultPath  {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.search-result-path::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.src139SearchResultList {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

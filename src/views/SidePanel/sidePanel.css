@@ -1,18 +1,23 @@
 .spl170SidePanel {
-    width: 25%;
-    max-width: 300px;
-    min-width: 200px;
-    background-color: var(--grey-background);
-    margin: 0 15px 0 0;
+  width: 25%;
+  max-width: 300px;
+  min-width: 200px;
+  background-color: var(--grey-background);
+  margin: 0 15px 0 0;
 }
 
 .spl171SidePanelHeading {
-    padding: 20px;
-    color: grey;
+  padding: 20px;
+  color: grey;
 }
 
 .spl172SidePanelContent {
-    height: 93vh;
-    overflow-y: scroll;
+  height: 93vh;
+  overflow-y: scroll;
 }
-  
+
+@media only screen and (max-width: 600px) {
+  .spl170SidePanel {
+    display: none;
+  }
+}
