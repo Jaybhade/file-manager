@@ -2,14 +2,34 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./createFolder.css";
 
-import { addRoute, addFolder, hideCreateFolderModal } from "../../store/actions";
+import {
+  addRoute,
+  addFolder,
+  hideCreateFolderModal,
+} from "../../store/actions";
 import Modal from "../../common/Modal";
 import ToggleTab from "../../common/ToggleTab";
 import { connect } from "react-redux";
 
-function CreateFolder(props: AppProps) {
+const CreateFolder = (props: AppProps) => {
   const location = useLocation();
   const [isFirst, setIsFirst] = useState<boolean>(true);
+
+  const findSubFolders = (id: string, folders: any, name: string) => {
+    if (folders.id === id) {
+      for (let i = 0; i < folders.subFolders.length; i++) {
+        if (folders.subFolders[i].name === name) {
+          return true;
+        }
+      }
+      return false;
+    } else {
+      for (let j = 0; j < folders.subFolders.length; j++) {
+        if(findSubFolders(id, folders.subFolders[j], name)) return true;
+      }
+    }
+    return false;
+  }
 
   const setFirst = () => {
     setIsFirst(true);
@@ -30,6 +50,7 @@ function CreateFolder(props: AppProps) {
       ...newFolderInfo,
       name: event.target.value,
     });
+    findSubFolders(props.parentId, props.folders, newFolderInfo.name)
   };
 
   const url = location.pathname + "/" + newFolderInfo.name;
@@ -43,9 +64,13 @@ function CreateFolder(props: AppProps) {
   };
 
   const handleSubmit = () => {
-    if (newFolderInfo.name.length > 0 && newFolderInfo.creator.length > 0) {
+    if (
+      newFolderInfo.name.length > 0 &&
+      newFolderInfo.creator.length > 0 &&
+      !findSubFolders(props.parentId, props.folders, newFolderInfo.name)
+    ) {
       const randId = Math.random().toString();
-      const newFolderData : NewFolderProps = {
+      const newFolderData: NewFolderProps = {
         id: randId,
         parentId: props.parentId,
         name: newFolderInfo.name,
@@ -53,9 +78,14 @@ function CreateFolder(props: AppProps) {
         type: isFirst ? "folder" : "file",
         date: new Date(),
         url: url,
-        subFolders: []
-      }
-      props.addRoute({id: randId, name: newFolderInfo.name, url: url, type: isFirst ? "folder" : "file"});
+        subFolders: [],
+      };
+      props.addRoute({
+        id: randId,
+        name: newFolderInfo.name,
+        url: url,
+        type: isFirst ? "folder" : "file",
+      });
       props.addFolder(newFolderData);
       props.hideCreateFolderModal();
     }
@@ -63,7 +93,7 @@ function CreateFolder(props: AppProps) {
 
   return (
     <Modal show={props.show} hideModal={props.hideCreateFolderModal}>
-      <div className="create-folder-parent">
+      <div className="crf150CreateFolderParent">
         <h2>Create New</h2>
         <ToggleTab
           first="Folder"
@@ -74,15 +104,18 @@ function CreateFolder(props: AppProps) {
         />
         <input
           maxLength={20}
-          className="create-folder-input"
+          className="crf151CreateFolderInput"
           placeholder="Name"
           value={newFolderInfo.name}
           onChange={(e) => handleName(e)}
           required
         />
+        {findSubFolders(props.parentId, props.folders, newFolderInfo.name) && (
+          <div className="crf153AlreadyExistWarning">Folder already exists.</div>
+        )}
         <input
           maxLength={20}
-          className="create-folder-input"
+          className="crf151CreateFolderInput"
           placeholder="Creator"
           value={newFolderInfo.creator}
           onChange={(e) => {
@@ -90,13 +123,13 @@ function CreateFolder(props: AppProps) {
           }}
           required
         />
-        <div className="create-folder-button" onClick={handleSubmit}>
+        <div className="crf152CreateFolderButton" onClick={handleSubmit}>
           Create
         </div>
       </div>
     </Modal>
   );
-}
+};
 
 type AppProps = {
   parentId: string;
@@ -104,6 +137,7 @@ type AppProps = {
   addRoute: any;
   hideCreateFolderModal: any;
   show: boolean;
+  folders: any;
 };
 
 type NewFolderProps = {
@@ -118,7 +152,11 @@ type NewFolderProps = {
 };
 
 const mapStateToProps = (state: any) => {
-  return {show: state.createFolderModal};
+  return { show: state.createFolderModal, folders: state.folders };
 };
 
-export default connect(mapStateToProps, { addRoute, addFolder, hideCreateFolderModal })(CreateFolder);
+export default connect(mapStateToProps, {
+  addRoute,
+  addFolder,
+  hideCreateFolderModal,
+})(CreateFolder);

@@ -1,4 +1,4 @@
-.toggle-tab-parent {
+.tgt148ToggleTabParent {
     display: flex;
     border: 1.5px solid grey;
     border-radius: 8px;
@@ -6,7 +6,7 @@
     cursor: pointer;
 }
 
-.toggle-tab {
+.tgt145ToggleTab {
     padding: 10px;
     width: 60px;
     display: flex;
@@ -14,13 +14,13 @@
     align-items: center;
 }
 
-.tab1 {
+.tgt146Tab1 {
     background-color: var(--theme-color);
     border-radius: 8px 0px 0 8px;
     color: white;
 }
 
-.tab2 {
+.tgt147Tab2 {
     background-color: var(--theme-color);
     border-radius: 0 8px 8px 0;
     color: white;

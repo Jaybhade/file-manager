@@ -2,11 +2,11 @@ import "./toggleTab.css"
 
 function ToggleTab(props: AppProps) {
 
-    const showFirst = props.isFirst ? "toggle-tab tab1" : "toggle-tab";
-    const showSecond = props.isFirst ? "toggle-tab" : "toggle-tab tab2";
+    const showFirst = props.isFirst ? "tgt145ToggleTab tgt146Tab1" : "tgt145ToggleTab";
+    const showSecond = props.isFirst ? "tgt145ToggleTab" : "tgt145ToggleTab tgt147Tab2";
 
   return (
-    <div className='toggle-tab-parent'>
+    <div className='tgt148ToggleTabParent'>
         <div className={showFirst} onClick={props.setFirst}>{props.first}</div>
         <div className={showSecond} onClick={props.setSecond}>{props.second}</div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, memo } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./search.css";
@@ -28,9 +28,9 @@ const SearchIcon = () => {
 
 const SearchResult = ({ name, url }: routeData) => {
   return (
-    <div className="search-result-parent">
-      <div className="search-result-name">{name}</div>
-      <div className="search-result-path">{url}</div>
+    <div className="src144SearchResultParent">
+      <div className="src140SearchResultName">{name}</div>
+      <div className="src141SearchResultPath">{url}</div>
     </div>
   );
 };
@@ -65,18 +65,18 @@ const Search = (props: AppProps) => {
   };
 
   return (
-    <div className="search-parent">
-      <span className="img">
+    <div className="src137SearchParent">
+      <span className="src142Image">
         <SearchIcon />
       </span>
       <input
-        className="search-input"
+        className="src138SearchInput"
         value={searchQuery}
         placeholder="Search for anything"
         onChange={(e) => handleSearchQuery(e)}
       />
       {searchQuery.length > 0 && (
-        <div className="search-result-list">
+        <div className="src139SearchResultList">
           {searchQuery.length > 0 &&
             searchQueryArray.map((data: routeData) => {
               return (
@@ -110,4 +110,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(Search);
+export default connect(mapStateToProps)(memo(Search));

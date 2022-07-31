@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import "./folderScreen.css";
 
 import { connect } from "react-redux";
@@ -87,19 +87,19 @@ const FolderScreen = (props: AppProps) => {
         <div></div>
       ) : (
         <div
-          className="folder-screen-parent"
+          className="fsc160FolderScreenParent"
           onContextMenu={(e) => handleContext(e)}
         >
           {showMenu && (
             <CreateNewFolderMenu top={top} left={left} parentId={props.id} />
           )}
           <Breadcrumb url={props.url} />
-          <div className="search-bar">
+          <div className="fsc161SearchBar">
             <Search parentUrl={props.url} />
           </div>
           <CreateFolder parentId={props.id} />
           <ImageModal url={props.imageUrl} />
-          <div className="scrollable">
+          <div className="fsc162Scrollable">
             <FolderInfo {...folderInfo} />
             {subFolders.map((data: folderData) => {
               return (
@@ -160,4 +160,4 @@ export default connect(mapStateToProps, {
   showCreateFolderModal,
   fetchImages,
   setLastVisitedUrl,
-})(FolderScreen);
+})(memo(FolderScreen));

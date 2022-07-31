@@ -1,4 +1,4 @@
-.modal {
+.mdl132Modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,7 +8,7 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
-.modal-main {
+.mdl134ModalMain {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,15 +23,15 @@
   transform: translate(-50%, -50%);
 }
 
-.display-block {
+.mdl133DisplayBlock {
   display: block;
 }
 
-.display-none {
+.mdl136DisplayNone {
   display: none;
 }
 
-.btn {
+.mdl135ModalButton {
     cursor: pointer;
     position: fixed;
     top: 10px;

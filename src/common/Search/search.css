@@ -1,4 +1,4 @@
-.search-input {
+.src138SearchInput {
     border-radius: 10px;
     padding : 10px 0 10px 35px;
     font-size: 18px;
@@ -6,14 +6,14 @@
     width: 300px;
 }
 
-.img {
+.src142Image {
     position: absolute;
     top: 18px;
     left: 20px;
     z-index: 100;
 }
 
-.search-result-parent {
+.src144SearchResultParent {
     cursor: pointer;
     padding: 10px 0 10px 15px;
     margin: 10px 0 10px 0;
@@ -22,27 +22,27 @@
     background-color: var(--grey-background);
 }
 
-.search-result-parent:hover {
+.src144SearchResultParent:hover {
     box-shadow: var(--box-shadow);
 }
 
-.search-result-path {
+.src141SearchResultPath {
     color: grey;
     overflow-y: scroll;
     max-width: 300px;
 }
 
-.search-result-list {
+.src139SearchResultList {
     height: 91vh;
     overflow-y: scroll;
 }
 
-.search-result-list::-webkit-scrollbar, .search-result-path::-webkit-scrollbar {
+.src139SearchResultList::-webkit-scrollbar, .search-result-path::-webkit-scrollbar {
     display: none;
   }
   
   /* Hide scrollbar for IE, Edge and Firefox */
-  .search-result-list, .search-result-path {
+  .src139SearchResultList, .src141SearchResultPath {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }

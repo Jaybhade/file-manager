@@ -1,17 +1,17 @@
-.create-folder-parent {
+.crf150CreateFolderParent {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.create-folder-input, .create-folder-button {
+.crf151CreateFolderInput, .crf152CreateFolderButton {
     width: 180px;
     margin: 8px;
     padding: 5px;
 }
 
-.create-folder-button {
+.crf152CreateFolderButton {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,6 +22,11 @@
     color: white;
 }
 
-.create-folder-button:active {
+.crf152CreateFolderButton:active {
     transform: scale(1.1);
+}
+
+.crf153AlreadyExistWarning {
+    font-size: 12px;
+    color: red;
 }

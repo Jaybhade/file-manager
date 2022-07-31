@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { Link } from "react-router-dom";
 import "./accordion.css";
 
-function Accordion(props: AppProps) {
+const Accordion = (props: AppProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <div className="accordion">
-      <div className="accordion-button" onClick={() => setIsOpen(!isOpen)}>
+    <div className="acc111AccordionParent">
+      <div className="acc112AccordionButton" onClick={() => setIsOpen(!isOpen)}>
         <div>
             <Link to={props.url}>{props.parentName}</Link>
         </div>
         <div>{props.containSubFolders ? (isOpen ? "-" : "+") : null}</div>
       </div>
       <div
-        className="accordion-child"
+        className="acc114AccordionChild"
         style={{ display: isOpen ? "block" : "none" }}
       >
         {props.children}
@@ -29,4 +29,4 @@ type AppProps = {
   url: string;
 };
 
-export default Accordion;
+export default memo(Accordion);

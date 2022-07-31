@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./breadcrumb.css";
 
-function Breadcrumb(props: AppProps) {
+const Breadcrumb = (props: AppProps) => {
   const [urlArray, setUrlArray] = useState<any>([]);
   const [backUrl, setBackUrl] = useState<string>("");
 
@@ -20,13 +20,13 @@ function Breadcrumb(props: AppProps) {
   }, [props.url]);
 
   return (
-    <ul className="breadcrumb">
+    <ul className="brd117Breadcrumb">
       {backUrl ? (
         <Link to={backUrl}>
-          <li className="navigate-back">⬆</li>
+          <li className="brd118NavigateBack">⬆</li>
         </Link>
       ) : (
-        <li className="navigate-back disable">⬆</li>
+        <li className="brd118NavigateBack disable">⬆</li>
       )}
       <span className="list">
         {urlArray.map((data: any) => {
@@ -34,7 +34,7 @@ function Breadcrumb(props: AppProps) {
             <React.Fragment key={data.url}>
               <li> / </li>
               <Link to={data.url}>
-                <li className={props.url !== data.url ? "make-light" : ""}>
+                <li className={props.url !== data.url ? "brd119MakeLight" : ""}>
                   {data.name}
                 </li>
               </Link>

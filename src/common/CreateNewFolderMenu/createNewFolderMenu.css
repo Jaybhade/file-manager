@@ -1,4 +1,4 @@
-.menu-parent {
+.cnf120MenuParent {
     box-shadow: var(--box-shadow);
     width: max-content;
     border-radius: 8px;
@@ -7,16 +7,16 @@
     z-index: 1;
   }
   
-  .menu-element {
+.cnf121MenuElement {
   padding: 10px 30px 12px 15px;
   }
   
-  .menu-element:hover {
+  .cnf121MenuElement:hover {
       background-color: var(--theme-color);
       color: white;
       cursor: pointer;
   }
   
-  .element1:hover {
+  .cnf122MenuElement1:hover {
       border-radius: 8px;
   }

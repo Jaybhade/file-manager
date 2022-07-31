@@ -12,8 +12,8 @@ function ImageThumbnail(props: any) {
   }
 
   return (
-    <span className="image-parent" onClick={handleImageOpen}>
-      <img className="image" src={props.urls.thumb} />
+    <span className="igt126ImageThumbnail" onClick={handleImageOpen}>
+      <img className="igt127Image" src={props.urls.thumb} />
       <p>{props.user.first_name}</p>
     </span>
   );

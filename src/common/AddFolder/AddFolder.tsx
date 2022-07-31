@@ -1,10 +1,10 @@
 import React from 'react'
 import "./addFolder.css"
 
-function AddFolder() {
+const AddFolder = () => {
   return (
-    <div className="add-folder-parent">
-        <div className="add-folder">+</div>
+    <div className="adf115AddFolderParent">
+        <div className="adf116AddFolder">+</div>
     </div>
   )
 }

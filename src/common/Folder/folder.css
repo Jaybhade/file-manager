@@ -1,4 +1,4 @@
-.folder-parent {
+.fol123FolderParent {
     cursor: pointer;
     margin: 0 20px 20px 20px;
     width: fit-content;
@@ -9,7 +9,7 @@
     float: left;
 }
 
-.folder {
+.fol124Folder {
     width: 130px;
     height: 85px;
     margin: 0 auto;
@@ -20,11 +20,11 @@
     z-index:auto;
 }
 
-.folder:hover {
+.fol124Folder:hover {
     box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.59);
 }
 
-.folder:before {
+.fol124Folder:before {
     content: '';
     width: 50%;
     height: 12px;

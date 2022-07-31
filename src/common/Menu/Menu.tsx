@@ -21,14 +21,14 @@ function Menu(props: AppProps) {
   }
 
   return (
-      <div className="menu-parent" style={{ top: props.top, left: props.left }}>
+      <div className="mnu128MenuParent" style={{ top: props.top, left: props.left }}>
         <Link to={props.url}>
-          <div className="menu-element element1">Open</div>
+          <div className="mnu129MenuElement mnu130Element1">Open</div>
         </Link>
-        <div className="menu-element" onClick={handleFolderInfo}>
+        <div className="mnu129MenuElement" onClick={handleFolderInfo}>
           Get Info
         </div>
-        <div className="menu-element delete" onClick={handleFolderDelete}>
+        <div className="mnu129MenuElement mnu131Delete" onClick={handleFolderDelete}>
           Delete
         </div>
       </div>

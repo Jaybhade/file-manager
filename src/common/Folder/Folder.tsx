@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { setFolderInfoId } from "../../store/actions";
 import { connect } from "react-redux";
 
-function Folder(props: AppProps) {
+const Folder = (props: AppProps) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [top, setTop] = useState<number>(0);
   const [left, setLeft] = useState<number>(0);
@@ -28,9 +28,9 @@ function Folder(props: AppProps) {
     <span onContextMenu={(e) => e.stopPropagation()}>
       {showMenu && <Menu url={props.url} top={top} left={left} id={props.id} />}
       <Link to={props.url}>
-        <span onContextMenu={(e) => handleContext(e)} className="folder-parent">
-          <span className="folder"></span>
-          <p className="folder-name">{props.name}</p>
+        <span onContextMenu={(e) => handleContext(e)} className="fol123FolderParent">
+          <span className="fol124Folder"></span>
+          <p className="fol125FolderName">{props.name}</p>
         </span>
       </Link>
     </span>

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {memo} from 'react'
 import "./sidePanel.css"
 
 import { connect } from 'react-redux';
 import Accordion from '../../common/Accordion';
 
-const SidePanel = (props: AppProps) => {
+const SidePanel = memo((props: AppProps) => {
     const ShowAccordion = ({name, url, subFolders}: folderData) => {
         return (
             <Accordion parentName={name} url={url} containSubFolders={subFolders.length > 0 ? true : false}>
@@ -16,14 +16,14 @@ const SidePanel = (props: AppProps) => {
     }
 
   return (
-    <div className="side-panel">
-        <div className="side-panel-heading">File Manager</div>
-        <div className="side-panel-content">
+    <div className="spl170SidePanel">
+        <div className="spl171SidePanelHeading">File Manager</div>
+        <div className="spl172SidePanelContent">
             <ShowAccordion {...props.folders} />
         </div>
     </div>
   )
-}
+})
 
 type folderData = {
     id: string;

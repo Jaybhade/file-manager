@@ -1,13 +1,13 @@
 import "./modal.css"
 
 const Modal = (props:AppProps) => {
-  const showHideClassName = props.show ? "modal display-block" : "modal display-none";
+  const showHideClassName = props.show ? "mdl132Modal mdl133DisplayBlock" : "mdl132Modal mdl136DisplayNone";
 
   return (
     <div className={showHideClassName}>
-      <section className="modal-main">
+      <section className="mdl134ModalMain">
         <div>{props.children}</div>
-        <div className="btn" onClick={props.hideModal}>✘</div>
+        <div className="mdl135ModalButton" onClick={props.hideModal}>✘</div>
       </section>
     </div>
   );
