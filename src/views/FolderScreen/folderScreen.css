@@ -30,4 +30,13 @@
         height: 1200px;
         width: 100px;
     }
+
+    .fsc162Scrollable {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+      
+    .fsc162Scrollable::-webkit-scrollbar{
+        display: none;
+    }
 }
