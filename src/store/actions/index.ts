@@ -97,17 +97,11 @@ export const setImageUrl = (url : string) => {
   }
 }
 
-export const fetchImages = () => {
-  return async function (dispatch: any) {
-    const response = await unsplash.get("photos", {
-      params: {
-        query: "dog",
-        client_id: "iCJ88n7zrJEbDaDih1boz9UbAFAb3vXVitmfo6UNWek",
-      },
-    });
-
-    dispatch({ type: "FETCH_IMAGES", payload: response.data });
-  };
+export const fetchImages = (ImagesData: any) => {
+  return {
+    type: "FETCH_IMAGES",
+    payload: ImagesData
+  }
 };
 
 

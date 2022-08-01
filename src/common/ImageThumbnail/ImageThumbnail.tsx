@@ -6,6 +6,7 @@ import ImageModal from "../ImageModal";
 import "./imageThumbnail.css";
 
 function ImageThumbnail(props: any) {
+
   const handleImageOpen = () => {
     props.showImageModal();
     props.setImageUrl(props.urls.small)

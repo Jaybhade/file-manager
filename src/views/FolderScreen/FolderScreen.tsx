@@ -1,4 +1,5 @@
 import React, { useEffect, useState, memo } from "react";
+import axios from "axios";
 import "./folderScreen.css";
 
 import { connect } from "react-redux";
@@ -17,12 +18,15 @@ import FolderInfo from "../../common/FolderInfo";
 import ImageThumbnail from "../../common/ImageThumbnail";
 import ImageModal from "../../common/ImageModal";
 import CreateNewFolderMenu from "../../common/CreateNewFolderMenu";
+import InfiniteScroll from "../../common/InfiniteScroll/InfiniteScroll";
 
 const FolderScreen = (props: AppProps) => {
   const [subFolders, setSubFolders] = useState<any>([]);
+  const [folderName, setFolderName] = useState<string>("");
   const [folderInfo, setFolderInfo] = useState<any>();
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [imageData, setImageData] = useState<any>([]);
   const [top, setTop] = useState<number>(0);
   const [left, setLeft] = useState<number>(0);
 
@@ -42,11 +46,16 @@ const FolderScreen = (props: AppProps) => {
     setTop(event.pageY);
   };
 
-  // useEffect(() => {
-  //   if (props.type === "foile") {
-  //     props.fetchImages();
-  //   }
-  // }, []);
+  const findFolderName = (id: string, folders: any) => {
+    if (folders.id === id) {
+      setFolderName(folders.name);
+      return folders.name
+    } else {
+      for (let i = 0; i < folders.subFolders.length; i++) {
+        if (findFolderName(id, folders.subFolders[i])) return folders.subFolders[i].name;
+      }
+    }
+  };
 
   const findFolderInfo = (id: string, folders: any) => {
     if (folders.id === id) {
@@ -59,10 +68,10 @@ const FolderScreen = (props: AppProps) => {
   };
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     props.setLastVisitedUrl(props.url);
     findFolderInfo(props.folderInfoId, props.folders);
-    setLoading(false)
+    setLoading(false);
   }, [props.folderInfoId, props.folders, findFolderInfo]);
 
   const findSubFolders = (id: string, folders: folderData) => {
@@ -80,6 +89,29 @@ const FolderScreen = (props: AppProps) => {
     findSubFolders(props.id, props.folders);
     setLoading(false);
   }, [props.id, props.folders]);
+
+  const hasMoreData = true;
+
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const randomPosts = await axios.get(
+  //       `https://api.unsplash.com/photos/random?page=1&query=office&count=10&client_id=iCJ88n7zrJEbDaDih1boz9UbAFAb3vXVitmfo6UNWek`
+  //     );
+  //     const newImages = randomPosts.data;
+  //     setImageData((prevData:any) => ([...prevData, ...newImages]));
+  //   };
+
+  //   fetch();
+  // }, []);
+
+  const LoadMore = async () => {
+    let newFolderName = findFolderName(props.id, props.folders);
+    const randomPosts = await axios.get(
+      `https://api.unsplash.com/photos/random?page=1&query=${newFolderName}&count=10&client_id=iCJ88n7zrJEbDaDih1boz9UbAFAb3vXVitmfo6UNWek`
+    );
+    const newImages = randomPosts.data;
+    setImageData((prevData:any) => ([...prevData, ...newImages]));
+  };
 
   return (
     <>
@@ -111,10 +143,18 @@ const FolderScreen = (props: AppProps) => {
                 />
               );
             })}
-            {props.type === "file" &&
-              props.images.map((data: any) => {
-                return <ImageThumbnail key={data.id} {...data} />;
-              })}
+            {props.type === "file" && (
+              <InfiniteScroll
+                hasMoreData={hasMoreData}
+                onBottomHit={LoadMore}
+                isLoading={loading}
+                loadOnMount={true}
+              >
+                {imageData.map((data: any) => {
+                    return <ImageThumbnail {...data} />
+                })}
+              </InfiniteScroll>
+            )}
             <span onClick={props.showCreateFolderModal}>
               <AddFolder />
             </span>
@@ -161,4 +201,4 @@ export default connect(mapStateToProps, {
   showCreateFolderModal,
   fetchImages,
   setLastVisitedUrl,
-})(memo(FolderScreen));
+})(FolderScreen);
