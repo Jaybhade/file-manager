@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
 
-import FoldersReducer from "./FoldersReducer";
-import RoutesReducer from "./RoutesReducer";
-import CreateFolderModalReducer from "./CreateFolderModalReducer";
-import FolderInfoModalReducer from "./FolderInfoModalReducer";
-import FolderInfoIdReducer from "./FolderInfoIdReducer";
-import FetchImagesReducer from "./FetchImagesReducer";
-import ImageModalReducer from "./ImageModalReducer";
-import ImageUrlReducer from "./ImageUrlReducer";
-import LastVisitedUrlReducer from "./LastVisitedUrlReducer";
+import FoldersReducer from "./foldersReducer";
+import RoutesReducer from "./routesReducer";
+import CreateFolderModalReducer from "./createFolderModalReducer";
+import FolderInfoModalReducer from "./folderInfoModalReducer";
+import FolderInfoIdReducer from "./folderInfoIdReducer";
+import FetchImagesReducer from "./fetchImagesReducer";
+import ImageModalReducer from "./imageModalReducer";
+import ImageUrlReducer from "./imageUrlReducer";
+import LastVisitedUrlReducer from "./lastVisitedUrlReducer";
 
 export default combineReducers({
   folders: FoldersReducer,

@@ -1,19 +1,25 @@
 .igt126ImageThumbnail {
-    cursor: pointer;
-    margin: 0 20px 20px 20px;
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    float: left;
+  cursor: pointer;
+  margin: 0 20px 20px 20px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  float: left;
 }
 
 .igt127Image {
-    width: 130px;
-    height: 85px;
-    margin: 0 auto;
-    margin-top: 50px;
-    position: relative;
-    border-radius: 6px;
+  width: 130px;
+  height: 85px;
+  margin: 0 auto;
+  margin-top: 50px;
+  position: relative;
+  border-radius: 6px;
+}
+
+@media only screen and (max-width: 600px) {
+  .igt127Image {
+    margin-top: 30px;
+  }
 }

@@ -102,7 +102,9 @@ const CreateFolder = (props: AppProps) => {
           setFirst={setFirst}
           setSecond={setSecond}
         />
+
         <input
+          autoFocus
           maxLength={20}
           className="crf151CreateFolderInput"
           placeholder="Name"
@@ -110,9 +112,11 @@ const CreateFolder = (props: AppProps) => {
           onChange={(e) => handleName(e)}
           required
         />
+
         {findSubFolders(props.parentId, props.folders, newFolderInfo.name) && (
           <div className="crf153AlreadyExistWarning">Folder already exists.</div>
         )}
+
         <input
           maxLength={20}
           className="crf151CreateFolderInput"
