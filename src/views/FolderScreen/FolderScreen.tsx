@@ -15,10 +15,10 @@ import CreateFolder from "../CreateFolder";
 import Breadcrumb from "../../common/Breadcrumb";
 import Search from "../../common/Search";
 import FolderInfo from "../../common/FolderInfo";
-import ImageThumbnail from "../../common/ImageThumbnail";
 import ImageModal from "../../common/ImageModal";
 import CreateNewFolderMenu from "../../common/CreateNewFolderMenu";
 import { NewFolderProps } from "../../utils/types";
+import Images from "../Images";
 
 const FolderScreen = (props: AppProps) => {
   const [subFolders, setSubFolders] = useState<any>([]);
@@ -26,12 +26,11 @@ const FolderScreen = (props: AppProps) => {
   const [folderInfo, setFolderInfo] = useState<any>();
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [imageData, setImageData] = useState<any>([]);
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [top, setTop] = useState<number>(0);
-  const [left, setLeft] = useState<number>(0);
 
-  const observer = useRef<IntersectionObserver>();
+  const [menuLocation, setMenuLocation] = useState<locationProps>({
+    x: 0,
+    y: 0,
+  });
 
   useEffect(() => {
     const handleClick = () => setShowMenu(false);
@@ -45,8 +44,7 @@ const FolderScreen = (props: AppProps) => {
   const handleContext = (event: any) => {
     event.preventDefault();
     setShowMenu(true);
-    setLeft(event.pageX);
-    setTop(event.pageY);
+    setMenuLocation({ x: event.pageX, y: event.pageY });
   };
 
   const findFolderName = (id: string, folders: NewFolderProps) => {
@@ -93,43 +91,6 @@ const FolderScreen = (props: AppProps) => {
     setLoading(false);
   }, [props.folders, props.id]);
 
-  const LoadMore = async () => {
-    let randomPosts;
-    let newImages: any;
-    try {
-      randomPosts = await axios.get(
-        `https://api.unsplash.com/photos/random?page=1&query=${folderName}&count=10&client_id=A2Yc5MAMwsJ4NJ0bPX851Zs7n3l3GILUXoIbuvqib3I`
-      );
-      newImages = randomPosts.data;
-    } catch (error: any) {
-      newImages = [];
-      if (error.response.status === 404) {
-        setErrorMessage("Images Not Found.");
-      } else if (error.response.status === 403) {
-        setErrorMessage(error.message);
-      }
-    }
-    // TcS3v_GtSFzM9_jiqfdfLD-l8wmfuIZ_H5__afwvPec
-    // A2Yc5MAMwsJ4NJ0bPX851Zs7n3l3GILUXoIbuvqib3I
-    // iCJ88n7zrJEbDaDih1boz9UbAFAb3vXVitmfo6UNWek
-
-    setImageData((prevData: any) => [...prevData, ...newImages]);
-    props.fetchImages(props.id, newImages);
-  };
-
-  const lastElementRef = useCallback(
-    (node: HTMLImageElement) => {
-      if (observer.current) observer.current.disconnect();
-
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].intersectionRatio) LoadMore();
-      });
-
-      if (node) observer.current.observe(node);
-    },
-    [LoadMore]
-  );
-
   return (
     <>
       {loading ? (
@@ -142,7 +103,11 @@ const FolderScreen = (props: AppProps) => {
           onContextMenu={(e) => handleContext(e)}
         >
           {showMenu && (
-            <CreateNewFolderMenu top={top} left={left} parentId={props.id} />
+            <CreateNewFolderMenu
+              top={menuLocation.y}
+              left={menuLocation.x}
+              parentId={props.id}
+            />
           )}
 
           <Breadcrumb url={props.url} />
@@ -157,16 +122,8 @@ const FolderScreen = (props: AppProps) => {
 
           <div className="fsc162Scrollable">
             <FolderInfo {...folderInfo} />
-            {errorMessage.length > 0 && (
-              <div
-                className={
-                  errorMessage.length > 0 ? "fsc168Error" : "fsc169DisplayNone"
-                }
-              >
-                <h2>{errorMessage}</h2>
-              </div>
-            )}
 
+            {/* subfolders */}
             {subFolders.map((data: NewFolderProps) => {
               return (
                 <Folder
@@ -178,21 +135,12 @@ const FolderScreen = (props: AppProps) => {
               );
             })}
 
-            {props.type === "file" && errorMessage.length === 0 && (
-              <>
-                {imageData.map((data: any) => {
-                  return <ImageThumbnail {...data} />;
-                })}
-
-                <div ref={lastElementRef} className="fsc167LoadImagesParent">
-                  <div className="fsc166LoadImages"></div>
-                </div>
-              </>
-            )}
-
+            {/* Add folder */}
             <span onClick={props.showCreateFolderModal}>
               <AddFolder />
             </span>
+
+            {props.type === "file" && <Images folderName={folderName} />}
 
             <div className="fsc163BottomSpace"></div>
           </div>
@@ -200,6 +148,11 @@ const FolderScreen = (props: AppProps) => {
       )}
     </>
   );
+};
+
+type locationProps = {
+  x: number;
+  y: number;
 };
 
 type AppProps = {

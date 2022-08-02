@@ -2,14 +2,13 @@ import React from "react";
 
 import { showImageModal, setImageUrl } from "../../store/actions";
 import { connect } from "react-redux";
-import ImageModal from "../ImageModal";
 import "./imageThumbnail.css";
 
 function ImageThumbnail(props: any) {
 
   const handleImageOpen = () => {
     props.showImageModal();
-    props.setImageUrl(props.urls.small)
+    props.setImageUrl(props.urls.regular)
   }
 
   return (
