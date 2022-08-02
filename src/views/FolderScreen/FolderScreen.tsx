@@ -49,10 +49,13 @@ const FolderScreen = (props: AppProps) => {
   const findFolderName = (id: string, folders: any) => {
     if (folders.id === id) {
       setFolderName(folders.name);
-      return folders.name
+      return folders.name;
     } else {
       for (let i = 0; i < folders.subFolders.length; i++) {
-        if (findFolderName(id, folders.subFolders[i])) return folders.subFolders[i].name;
+        if (findFolderName(id, folders.subFolders[i])) {
+          setFolderName(folders.subFolders[i].name);
+          return folders.subFolders[i].name;
+        }
       }
     }
   };
@@ -72,7 +75,7 @@ const FolderScreen = (props: AppProps) => {
     props.setLastVisitedUrl(props.url);
     findFolderInfo(props.folderInfoId, props.folders);
     setLoading(false);
-  }, [props.folderInfoId, props.folders, findFolderInfo]);
+  }, [props.folderInfoId, props.folders, findFolderInfo, props.id]);
 
   const findSubFolders = (id: string, folders: folderData) => {
     if (folders.id === id) {
@@ -87,30 +90,22 @@ const FolderScreen = (props: AppProps) => {
   useEffect(() => {
     setLoading(true);
     findSubFolders(props.id, props.folders);
+    findFolderName(props.id, props.folders);
     setLoading(false);
   }, [props.id, props.folders]);
 
   const hasMoreData = true;
 
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const randomPosts = await axios.get(
-  //       `https://api.unsplash.com/photos/random?page=1&query=office&count=10&client_id=iCJ88n7zrJEbDaDih1boz9UbAFAb3vXVitmfo6UNWek`
-  //     );
-  //     const newImages = randomPosts.data;
-  //     setImageData((prevData:any) => ([...prevData, ...newImages]));
-  //   };
-
-  //   fetch();
-  // }, []);
-
   const LoadMore = async () => {
-    let newFolderName = findFolderName(props.id, props.folders);
     const randomPosts = await axios.get(
-      `https://api.unsplash.com/photos/random?page=1&query=${newFolderName}&count=10&client_id=iCJ88n7zrJEbDaDih1boz9UbAFAb3vXVitmfo6UNWek`
+      `https://api.unsplash.com/photos/random?page=1&query=${folderName}&count=10&client_id=A2Yc5MAMwsJ4NJ0bPX851Zs7n3l3GILUXoIbuvqib3I`
     );
+    // TcS3v_GtSFzM9_jiqfdfLD-l8wmfuIZ_H5__afwvPec
+    // A2Yc5MAMwsJ4NJ0bPX851Zs7n3l3GILUXoIbuvqib3I
+    // iCJ88n7zrJEbDaDih1boz9UbAFAb3vXVitmfo6UNWek
     const newImages = randomPosts.data;
-    setImageData((prevData:any) => ([...prevData, ...newImages]));
+    // props.fetchImages(props.id, newImages);  
+    setImageData((prevData: any) => [...prevData, ...newImages]);
   };
 
   return (
@@ -151,7 +146,7 @@ const FolderScreen = (props: AppProps) => {
                 loadOnMount={true}
               >
                 {imageData.map((data: any) => {
-                    return <ImageThumbnail {...data} />
+                  return <ImageThumbnail {...data} />;
                 })}
               </InfiniteScroll>
             )}

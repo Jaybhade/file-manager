@@ -97,10 +97,15 @@ export const setImageUrl = (url : string) => {
   }
 }
 
-export const fetchImages = (ImagesData: any) => {
+type ImagesType = {
+  id: string;
+  newImages: any;
+}
+
+export const fetchImages = (imagesData: ImagesType) => {
   return {
     type: "FETCH_IMAGES",
-    payload: ImagesData
+    payload: imagesData
   }
 };
 
