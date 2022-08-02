@@ -18,12 +18,14 @@
 
 @media only screen and (max-width: 600px) {
     .fsc160FolderScreenParent {
-        margin-left: 10px;
         display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .fsc162Scrollable {
         margin-top: 100px;
+        width: 100vh;
     }
 
     .fsc163BottomSpace {
@@ -84,4 +86,15 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+}
+
+.fsc168Error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.fsc169DisplayNone {
+  display: none;
 }

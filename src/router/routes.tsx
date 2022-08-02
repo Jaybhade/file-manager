@@ -32,10 +32,6 @@ function Routes(props: AppProps) {
             />
           );
         })}
-
-        {/* <Route path="*">
-          <FolderNotFound />
-        </Route> */}
       </>
     );
   };
@@ -43,6 +39,7 @@ function Routes(props: AppProps) {
   return (
     <Switch>
       <AllRoutes />
+      <Route path="*" component={FolderNotFound} />
     </Switch>
   );
 }

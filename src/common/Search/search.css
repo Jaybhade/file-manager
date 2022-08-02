@@ -60,4 +60,9 @@
   .src138SearchInput {
     position:sticky;
   }
+
+  .src138SearchInput {
+    padding: 10px 0 10px 35px;
+    width: 75vw;
+  }
 }
