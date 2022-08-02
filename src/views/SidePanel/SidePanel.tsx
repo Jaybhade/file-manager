@@ -3,12 +3,13 @@ import "./sidePanel.css"
 
 import { connect } from 'react-redux';
 import Accordion from '../../common/Accordion';
+import { NewFolderProps } from '../../utils/types';
 
 const SidePanel = memo((props: AppProps) => {
-    const ShowAccordion = ({name, url, subFolders}: folderData) => {
+    const ShowAccordion = ({name, url, subFolders}: NewFolderProps) => {
         return (
             <Accordion parentName={name} url={url} containSubFolders={subFolders.length > 0 ? true : false}>
-                {subFolders.map((data: folderData) => {
+                {subFolders.map((data: NewFolderProps) => {
                     return <ShowAccordion key={data.id} {...data} />
                 })}
             </Accordion>
@@ -25,17 +26,8 @@ const SidePanel = memo((props: AppProps) => {
   )
 })
 
-type folderData = {
-    id: string;
-    name: string;
-    url: string;
-    creator: string;
-    date: Date;
-    subFolders: Array<folderData>;
-  }
-
 type AppProps = {
-    folders : folderData;
+    folders : NewFolderProps;
 }
 
 const mapStateToProps = (state: any) => {

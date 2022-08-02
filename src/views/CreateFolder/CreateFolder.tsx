@@ -137,7 +137,7 @@ type AppProps = {
   addRoute: any;
   hideCreateFolderModal: any;
   show: boolean;
-  folders: any;
+  folders: NewFolderProps;
 };
 
 type NewFolderProps = {

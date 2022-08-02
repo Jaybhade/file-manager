@@ -19,6 +19,7 @@ import ImageThumbnail from "../../common/ImageThumbnail";
 import ImageModal from "../../common/ImageModal";
 import CreateNewFolderMenu from "../../common/CreateNewFolderMenu";
 import InfiniteScroll from "../../common/InfiniteScroll/InfiniteScroll";
+import { NewFolderProps } from "../../utils/types";
 
 const FolderScreen = (props: AppProps) => {
   const [subFolders, setSubFolders] = useState<any>([]);
@@ -77,7 +78,7 @@ const FolderScreen = (props: AppProps) => {
     setLoading(false);
   }, [props.folderInfoId, props.folders, findFolderInfo, props.id]);
 
-  const findSubFolders = (id: string, folders: folderData) => {
+  const findSubFolders = (id: string, folders: NewFolderProps) => {
     if (folders.id === id) {
       setSubFolders([...folders.subFolders]);
     } else {
@@ -128,7 +129,7 @@ const FolderScreen = (props: AppProps) => {
           <ImageModal url={props.imageUrl} />
           <div className="fsc162Scrollable">
             <FolderInfo {...folderInfo} />
-            {subFolders.map((data: folderData) => {
+            {subFolders.map((data: NewFolderProps) => {
               return (
                 <Folder
                   key={data.id}
@@ -161,19 +162,10 @@ const FolderScreen = (props: AppProps) => {
   );
 };
 
-type folderData = {
-  id: string;
-  name: string;
-  url: string;
-  creator: string;
-  date: Date;
-  subFolders: Array<folderData>;
-};
-
 type AppProps = {
   id: string;
   url: string;
-  folders: folderData;
+  folders: NewFolderProps;
   type: string;
   showCreateFolderModal: any;
   folderInfoId: string;

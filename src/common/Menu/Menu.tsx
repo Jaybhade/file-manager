@@ -9,6 +9,8 @@ import {
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { NewFolderProps } from "../../utils/types";
+
 function Menu(props: AppProps) {
 
   const handleFolderDelete = () => {
@@ -41,7 +43,7 @@ type AppProps = {
   left: number;
   removeFolder: any;
   removeRoute: any;
-  folders: any;
+  folders: NewFolderProps;
   url: string;
   showFolderInfoModal: any;
   setFolderInfoId: any;

@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { JsxAttribute } from "typescript";
 
 type Props = {
     onBottomHit: () => void;
     isLoading: boolean;
     hasMoreData: boolean;
     loadOnMount: boolean;
-    children: any;
+    children: JsxAttribute;
   };
   
   function isBottom(ref: React.RefObject<HTMLDivElement>) {

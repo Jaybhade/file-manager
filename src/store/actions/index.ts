@@ -1,23 +1,7 @@
 import unsplash from "../../utils/unsplash";
 
+import { NewFolderProps, NewRouteProps } from "../../utils/types";
 //Action Creator
-
-type NewFolderProps = {
-  id: string;
-  parentId: string;
-  name: string;
-  creator: string;
-  type: "folder" | "file";
-  date: Date;
-  url: string;
-  subFolders: [];
-};
-
-type NewRouteProps = {
-  id: string;
-  name: string;
-  url: string;
-};
 
 export const addFolder = (folderDetails: NewFolderProps) => {
   return {
@@ -90,29 +74,28 @@ export const hideImageModal = () => {
   };
 };
 
-export const setImageUrl = (url : string) => {
+export const setImageUrl = (url: string) => {
   return {
     type: "SET_IMAGE_URL",
-    payload: url
-  }
-}
+    payload: url,
+  };
+};
 
 type ImagesType = {
   id: string;
   newImages: any;
-}
+};
 
 export const fetchImages = (imagesData: ImagesType) => {
   return {
     type: "FETCH_IMAGES",
-    payload: imagesData
-  }
+    payload: imagesData,
+  };
 };
-
 
 export const setLastVisitedUrl = (url: string) => {
   return {
-    type : "SET_LAST_VISITED_URL",
-    payload: url
-  }
-}
+    type: "SET_LAST_VISITED_URL",
+    payload: url,
+  };
+};

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { addFolder } from "../store/actions";
+import { NewFolderProps, NewRouteProps } from "../utils/types";
 import FolderScreen from "../views/FolderScreen";
 
 function Routes(props: AppProps) {
@@ -33,24 +34,9 @@ function Routes(props: AppProps) {
   );
 }
 
-type folderData = {
-  id: string;
-  name: string;
-  url: string;
-  creator: string;
-  date: Date;
-  subFolders: Array<folderData>;
-};
-
-type routeData = {
-  id: string;
-  name: string;
-  url: string;
-};
-
 type AppProps = {
-  folder: folderData;
-  route: Array<routeData>;
+  folder: NewFolderProps;
+  route: Array<NewRouteProps>;
   addFolder: any;
   lastVisitedUrl: string;
 };

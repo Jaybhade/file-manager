@@ -5,6 +5,7 @@ import "./folder.css";
 import { Link } from "react-router-dom";
 import { setFolderInfoId } from "../../store/actions";
 import { connect } from "react-redux";
+import { NewFolderProps } from "../../utils/types";
 
 const Folder = (props: AppProps) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -41,7 +42,7 @@ type RequiredProps = {
   name: string;
   id: string;
   url: string;
-  folders: any;
+  folders: NewFolderProps;
   setFolderInfoId : any;
 };
 
