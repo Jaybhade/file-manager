@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from "react";
+import React, { useEffect, useState, memo, useRef, useCallback } from "react";
 import axios from "axios";
 import "./folderScreen.css";
 
@@ -18,7 +18,6 @@ import FolderInfo from "../../common/FolderInfo";
 import ImageThumbnail from "../../common/ImageThumbnail";
 import ImageModal from "../../common/ImageModal";
 import CreateNewFolderMenu from "../../common/CreateNewFolderMenu";
-import InfiniteScroll from "../../common/InfiniteScroll/InfiniteScroll";
 import { NewFolderProps } from "../../utils/types";
 
 const FolderScreen = (props: AppProps) => {
@@ -28,8 +27,11 @@ const FolderScreen = (props: AppProps) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [imageData, setImageData] = useState<any>([]);
+  
   const [top, setTop] = useState<number>(0);
   const [left, setLeft] = useState<number>(0);
+
+  const observer = useRef<IntersectionObserver>();
 
   useEffect(() => {
     const handleClick = () => setShowMenu(false);
@@ -71,13 +73,6 @@ const FolderScreen = (props: AppProps) => {
     }
   };
 
-  useEffect(() => {
-    setLoading(true);
-    props.setLastVisitedUrl(props.url);
-    findFolderInfo(props.folderInfoId, props.folders);
-    setLoading(false);
-  }, [props.folderInfoId, props.folders, findFolderInfo, props.id]);
-
   const findSubFolders = (id: string, folders: NewFolderProps) => {
     if (folders.id === id) {
       setSubFolders([...folders.subFolders]);
@@ -90,29 +85,58 @@ const FolderScreen = (props: AppProps) => {
 
   useEffect(() => {
     setLoading(true);
+    props.setLastVisitedUrl(props.url);
+    findFolderInfo(props.folderInfoId, props.folders);
+    setLoading(false);
+  }, [props.folderInfoId, props.folders, findFolderInfo, props.id]);
+
+  useEffect(() => {
+    setLoading(true);
     findSubFolders(props.id, props.folders);
     findFolderName(props.id, props.folders);
     setLoading(false);
-  }, [props.id, props.folders]);
-
-  const hasMoreData = true;
+  }, [props.folders, props.id]);
 
   const LoadMore = async () => {
-    const randomPosts = await axios.get(
-      `https://api.unsplash.com/photos/random?page=1&query=${folderName}&count=10&client_id=A2Yc5MAMwsJ4NJ0bPX851Zs7n3l3GILUXoIbuvqib3I`
-    );
+    let randomPosts;
+    let newImages:any;
+    try {
+      randomPosts = await axios.get(
+        `https://api.unsplash.com/photos/random?page=1&query=${folderName}&count=10&client_id=A2Yc5MAMwsJ4NJ0bPX851Zs7n3l3GILUXoIbuvqib3I`
+      );
+      newImages = randomPosts.data;
+    }catch(error) {
+      newImages = [];
+      console.log(error);
+    } 
     // TcS3v_GtSFzM9_jiqfdfLD-l8wmfuIZ_H5__afwvPec
     // A2Yc5MAMwsJ4NJ0bPX851Zs7n3l3GILUXoIbuvqib3I
     // iCJ88n7zrJEbDaDih1boz9UbAFAb3vXVitmfo6UNWek
-    const newImages = randomPosts.data;
-    // props.fetchImages(props.id, newImages);  
+    
+
     setImageData((prevData: any) => [...prevData, ...newImages]);
+    props.fetchImages(props.id, newImages);
   };
+
+  const lastElementRef = useCallback(
+		(node: HTMLImageElement) => {
+			if (observer.current) observer.current.disconnect();
+
+			observer.current = new IntersectionObserver((entries) => {
+				if (entries[0].intersectionRatio) LoadMore();
+			});
+
+			if (node) observer.current.observe(node);
+		},
+		[LoadMore]
+	);
 
   return (
     <>
       {loading ? (
-        <div></div>
+        <div className="fsc165LoaderParent">
+          <div className="fsc164Loader"></div>
+        </div>
       ) : (
         <div
           className="fsc160FolderScreenParent"
@@ -121,14 +145,20 @@ const FolderScreen = (props: AppProps) => {
           {showMenu && (
             <CreateNewFolderMenu top={top} left={left} parentId={props.id} />
           )}
+
           <Breadcrumb url={props.url} />
+
           <div className="fsc161SearchBar">
             <Search parentUrl={props.url} />
           </div>
+
           <CreateFolder parentId={props.id} />
+
           <ImageModal url={props.imageUrl} />
+
           <div className="fsc162Scrollable">
             <FolderInfo {...folderInfo} />
+
             {subFolders.map((data: NewFolderProps) => {
               return (
                 <Folder
@@ -139,21 +169,25 @@ const FolderScreen = (props: AppProps) => {
                 />
               );
             })}
+
             {props.type === "file" && (
-              <InfiniteScroll
-                hasMoreData={hasMoreData}
-                onBottomHit={LoadMore}
-                isLoading={loading}
-                loadOnMount={true}
-              >
-                {imageData.map((data: any) => {
-                  return <ImageThumbnail {...data} />;
-                })}
-              </InfiniteScroll>
+              <>
+                  {imageData.map((data: any) => {
+                    return <ImageThumbnail {...data} />;
+                  })}
+
+                <div ref={lastElementRef} className="fsc167LoadImagesParent">
+                  <div className="fsc166LoadImages"></div>
+                </div>
+              </>
             )}
-            <span onClick={props.showCreateFolderModal}>
-              <AddFolder />
-            </span>
+
+            {props.type !== "file" && (
+              <span onClick={props.showCreateFolderModal}>
+                <AddFolder />
+              </span>
+            )}
+
             <div className="fsc163BottomSpace"></div>
           </div>
         </div>

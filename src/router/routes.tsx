@@ -4,13 +4,17 @@ import { Redirect, Route, Switch } from "react-router-dom";
 
 import { addFolder } from "../store/actions";
 import { NewFolderProps, NewRouteProps } from "../utils/types";
+import FolderNotFound from "../views/FolderNotFound/FolderNotFound";
 import FolderScreen from "../views/FolderScreen";
 
 function Routes(props: AppProps) {
   const AllRoutes = () => {
     return (
       <>
-        <Route exact path="/"><Redirect to={props.lastVisitedUrl} /></Route>
+        <Route exact path="/">
+          <Redirect to={props.lastVisitedUrl} />
+        </Route>
+
         {props.route.map((data: any) => {
           return (
             <Route
@@ -18,11 +22,20 @@ function Routes(props: AppProps) {
               key={data.id}
               path={`${data.url}`}
               render={(props) => (
-                <FolderScreen {...props} id={data.id} url={data.url} type={data.type} />
+                <FolderScreen
+                  {...props}
+                  id={data.id}
+                  url={data.url}
+                  type={data.type}
+                />
               )}
             />
           );
         })}
+
+        {/* <Route path="*">
+          <FolderNotFound />
+        </Route> */}
       </>
     );
   };
@@ -45,7 +58,7 @@ const mapStateToProps = (state: any) => {
   return {
     folder: state.folders,
     route: state.routes,
-    lastVisitedUrl: state.lastVisitedUrl
+    lastVisitedUrl: state.lastVisitedUrl,
   };
 };
 

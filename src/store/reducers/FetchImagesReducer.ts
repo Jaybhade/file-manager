@@ -1,11 +1,13 @@
 import { AnyAction } from "redux";
 
-const initialImages = {};
+const initialImages:any = [];
 
 const FetchImagesReducer = (images = initialImages, action: AnyAction) => {
   if (action.type === "FETCH_IMAGES") {
-    let id = action.payload.id;
-    return { ...images, id: [...action.payload.newImages] };
+    console.log(action.payload.data);
+    let previousImages = initialImages.find((element:any) => element.id === action.payload.id);
+    let restImages = initialImages.filter((element:any) => element.id !== action.payload.id);
+    return [...restImages, {id: action.payload.id, data: [...previousImages.data, ...action.payload.data]}];
   }
 
   return images;
