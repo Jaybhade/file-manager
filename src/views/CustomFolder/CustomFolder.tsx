@@ -39,8 +39,8 @@ const Images = (props: AppProps) => {
     (node: HTMLImageElement) => {
       if (observer.current) observer.current.disconnect();
 
-      observer.current = new IntersectionObserver((images) => {
-        if (images[0].intersectionRatio) LoadMore();
+      observer.current = new IntersectionObserver((loader) => {
+        if (loader[0].intersectionRatio) LoadMore();
       });
 
       if (node) observer.current.observe(node);
