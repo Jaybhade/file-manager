@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import "./createFolder.css";
+
+import { useLocation } from "react-router-dom";
+import { findSubFolders } from "../../utils";
 
 import {
   addRoute,
@@ -13,36 +15,26 @@ import { connect } from "react-redux";
 
 const CreateFolder = (props: AppProps) => {
   const location = useLocation();
+  const inputElement = useRef<HTMLInputElement>(null);
+  const creatorElement = useRef<HTMLInputElement>(null);
+  const timeout = useRef<any>();
+
   const [isFirst, setIsFirst] = useState<boolean>(true);
-
-  const findSubFolders = (id: string, folders: any, name: string) => {
-    if (folders.id === id) {
-      for (let i = 0; i < folders.subFolders.length; i++) {
-        if (folders.subFolders[i].name === name) {
-          return true;
-        }
-      }
-      return false;
-    } else {
-      for (let j = 0; j < folders.subFolders.length; j++) {
-        if(findSubFolders(id, folders.subFolders[j], name)) return true;
-      }
-    }
-    return false;
-  }
-
-  const setFirst = () => {
-    setIsFirst(true);
-  };
-
-  const setSecond = () => {
-    setIsFirst(false);
-  };
-
+  const [sameFolderAlreadyExist, setSameFolderAlreadyExist] = useState<boolean>(false);
   const [newFolderInfo, setNewFolderInfo] = useState<any>({
     name: "",
     creator: "",
   });
+
+  const setFirst = () => setIsFirst(true);
+  const setSecond = () => setIsFirst(false);
+
+  useEffect(() => {
+    clearTimeout(timeout.current);
+    timeout.current = setTimeout(() => {
+      setSameFolderAlreadyExist(findSubFolders(props.parentId, props.folders, newFolderInfo.name))
+    }, 500);
+  }, [newFolderInfo.name])
 
   const handleName = (event: any) => {
     event.persist();
@@ -50,10 +42,7 @@ const CreateFolder = (props: AppProps) => {
       ...newFolderInfo,
       name: event.target.value,
     });
-    findSubFolders(props.parentId, props.folders, newFolderInfo.name)
   };
-
-  const url = location.pathname + "/" + newFolderInfo.name;
 
   const handleCreator = (event: any) => {
     event.persist();
@@ -62,6 +51,8 @@ const CreateFolder = (props: AppProps) => {
       creator: event.target.value,
     });
   };
+
+  const url = location.pathname + "/" + newFolderInfo.name;
 
   const handleSubmit = () => {
     if (
@@ -104,26 +95,41 @@ const CreateFolder = (props: AppProps) => {
         />
 
         <input
-          autoFocus
+          ref={inputElement}
           maxLength={20}
           className="crf151CreateFolderInput"
           placeholder="Name"
           value={newFolderInfo.name}
           onChange={(e) => handleName(e)}
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              if (creatorElement.current) {
+                creatorElement.current.focus();
+              }
+            }
+          }}
           required
         />
 
-        {findSubFolders(props.parentId, props.folders, newFolderInfo.name) && (
-          <div className="crf153AlreadyExistWarning">Folder already exists.</div>
+        {sameFolderAlreadyExist && (
+          <div className="crf153AlreadyExistWarning">
+            Folder already exists.
+          </div>
         )}
 
         <input
           maxLength={20}
+          ref={creatorElement}
           className="crf151CreateFolderInput"
           placeholder="Creator"
           value={newFolderInfo.creator}
           onChange={(e) => {
             handleCreator(e);
+          }}
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              handleSubmit();
+            }
           }}
           required
         />
@@ -152,7 +158,7 @@ type NewFolderProps = {
   type: "folder" | "file";
   date: Date;
   url: string;
-  subFolders: [];
+  subFolders: Array<NewFolderProps>;
 };
 
 const mapStateToProps = (state: any) => {

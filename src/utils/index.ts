@@ -22,3 +22,19 @@ export const findIdAndRemoveFolder = (id: string, folders: any) => {
 
   return folders;
 };
+
+export const findSubFolders = (id: string, folders: any, name: string) => {
+  if (folders.id === id) {
+    for (let i = 0; i < folders.subFolders.length; i++) {
+      if (folders.subFolders[i].name === name) {
+        return true;
+      }
+    }
+    return false;
+  } else {
+    for (let j = 0; j < folders.subFolders.length; j++) {
+      if (findSubFolders(id, folders.subFolders[j], name)) return true;
+    }
+  }
+  return false;
+};

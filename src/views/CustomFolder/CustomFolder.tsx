@@ -13,7 +13,7 @@ const Images = (props: AppProps) => {
     let newImages: any;
     try {
       randomPosts = await axios.get(
-        `https://api.unsplash.com/photos/random?page=1&query=${props.folderName}&count=10&client_id=${process.env.CLIENT_ID}`
+        `https://api.unsplash.com/photos/random?page=1&query=${props.folderName}&count=10&client_id=A2Yc5MAMwsJ4NJ0bPX851Zs7n3l3GILUXoIbuvqib3I`
       );
       newImages = randomPosts.data;
     } catch (error: any) {
