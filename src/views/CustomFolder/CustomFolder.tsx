@@ -3,7 +3,6 @@ import { useCallback, useRef, useState } from "react";
 import ImageThumbnail from "../../common/ImageThumbnail";
 
 const Images = (props: AppProps) => {
-
   const observer = useRef<IntersectionObserver>();
 
   const [imageData, setImageData] = useState<any>([]);
@@ -14,7 +13,7 @@ const Images = (props: AppProps) => {
     let newImages: any;
     try {
       randomPosts = await axios.get(
-        `https://api.unsplash.com/photos/random?page=1&query=${props.folderName}&count=10&client_id=TcS3v_GtSFzM9_jiqfdfLD-l8wmfuIZ_H5__afwvPec`
+        `https://api.unsplash.com/photos/random?page=1&query=${props.folderName}&count=10&client_id=${process.env.CLIENT_ID}`
       );
       newImages = randomPosts.data;
     } catch (error: any) {
@@ -48,19 +47,17 @@ const Images = (props: AppProps) => {
   return (
     <div>
       {/* error message */}
-      {errorMessage.length > 0 && (
-        <div
-          className={
-            errorMessage.length > 0 ? "fsc168Error" : "fsc169DisplayNone"
-          }
-        >
+      {props.type=="file" && errorMessage.length > 0 && (
+        <div className="fsc168Error">
           <div></div>
           <h2>{errorMessage}</h2>
         </div>
       )}
 
+      <>{props.children}</>
+
       {/* images */}
-      {errorMessage.length === 0 && (
+      {props.type==="file" && errorMessage.length === 0 && (
         <>
           {imageData.map((data: any) => {
             return <ImageThumbnail {...data} />;
@@ -69,7 +66,7 @@ const Images = (props: AppProps) => {
       )}
 
       {/* loader */}
-      {errorMessage.length === 0 && (
+      {props.type==="file" && errorMessage.length === 0 && (
         <div ref={lastElementRef} className="fsc167LoadImagesParent">
           <div className="fsc166LoadImages"></div>
         </div>
@@ -79,7 +76,9 @@ const Images = (props: AppProps) => {
 };
 
 type AppProps = {
-    folderName: string;
-}
+  folderName: string;
+  children: React.ReactNode;
+  type: string;
+};
 
 export default Images;

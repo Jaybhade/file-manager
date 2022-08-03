@@ -18,12 +18,12 @@ import FolderInfo from "../../common/FolderInfo";
 import ImageModal from "../../common/ImageModal";
 import CreateNewFolderMenu from "../../common/CreateNewFolderMenu";
 import { NewFolderProps } from "../../utils/types";
-import Images from "../Images";
+import CustomFolders from "../CustomFolder";
 
 const FolderScreen = (props: AppProps) => {
-  const [subFolders, setSubFolders] = useState<any>([]);
+  const [subFolders, setSubFolders] = useState<Array<NewFolderProps>>([]);
   const [folderName, setFolderName] = useState<string>("");
-  const [folderInfo, setFolderInfo] = useState<any>();
+  const [folderInfo, setFolderInfo] = useState<NewFolderProps>();
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -123,24 +123,24 @@ const FolderScreen = (props: AppProps) => {
           <div className="fsc162Scrollable">
             <FolderInfo {...folderInfo} />
 
-            {/* subfolders */}
-            {subFolders.map((data: NewFolderProps) => {
-              return (
-                <Folder
-                  key={data.id}
-                  name={data.name}
-                  id={data.id}
-                  url={data.url}
-                />
-              );
-            })}
+            {/* subfolders and images */}
+              <CustomFolders folderName={folderName} type={props.type}>
+                {subFolders.map((data: NewFolderProps) => {
+                  return (
+                    <Folder
+                      key={data.id}
+                      name={data.name}
+                      id={data.id}
+                      url={data.url}
+                    />
+                  );
+                })}
 
-            {/* Add folder */}
-            <span onClick={props.showCreateFolderModal}>
-              <AddFolder />
-            </span>
-
-            {props.type === "file" && <Images folderName={folderName} />}
+                {/* Add folder */}
+                <span onClick={props.showCreateFolderModal}>
+                  <AddFolder />
+                </span>
+              </CustomFolders>
 
             <div className="fsc163BottomSpace"></div>
           </div>
