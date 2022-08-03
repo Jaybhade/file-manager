@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./imageModal.css";
 
 import { connect } from "react-redux";
@@ -7,13 +7,27 @@ import { hideImageModal } from "../../store/actions";
 import Modal from "../Modal";
 
 function ImageModal(props: AppProps) {
+  const [show, setShow] = useState<boolean>(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = props.imageData.url;
+    img.onload = () => {
+      setShow(true);
+    };
+
+    return () => {
+      setShow(false)
+    }
+  }, [props.imageData.url]);
+
   return (
     <Modal show={props.show} hideModal={props.hideImageModal}>
-      {props.url ? (
-        <img src={props.url} className="imd180Image" />
-      ) : (
-        <div className="imd181Loader"></div>
-      )}
+        <img
+          src={show ? props.imageData.url : props.imageData.placeholder}
+          style={{width: 500, height: (500*props.imageData.height)/props.imageData.width}}
+          className="imd180Image"
+        />
     </Modal>
   );
 }
@@ -21,7 +35,7 @@ function ImageModal(props: AppProps) {
 type AppProps = {
   show: boolean;
   hideImageModal: any;
-  url: string;
+  imageData: any;
 };
 
 const mapStateToProps = (state: any) => {

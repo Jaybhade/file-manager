@@ -8,7 +8,12 @@ function ImageThumbnail(props: any) {
 
   const handleImageOpen = () => {
     props.showImageModal();
-    props.setImageUrl(props.urls.regular)
+    props.setImageUrl({
+      url: props.urls.small,
+      placeholder: props.urls.thumb,
+      width: props.width,
+      height: props.height
+    })
   }
 
   return (

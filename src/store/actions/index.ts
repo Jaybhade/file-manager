@@ -74,10 +74,10 @@ export const hideImageModal = () => {
   };
 };
 
-export const setImageUrl = (url: string) => {
+export const setImageUrl = (ImageData: any) => {
   return {
     type: "SET_IMAGE_URL",
-    payload: url,
+    payload: ImageData,
   };
 };
 

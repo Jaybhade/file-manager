@@ -1,11 +1,12 @@
 import { AnyAction } from "redux";
 
-const ImageUrlReducer = (imageUrl = "", action: AnyAction) => {
+const ImageUrlReducer = (imageData = {}, action: AnyAction) => {
   if (action.type === "SET_IMAGE_URL") {
+    console.log(action.payload)
     return action.payload;
   }
 
-  return imageUrl;
+  return imageData;
 };
 
 export default ImageUrlReducer;

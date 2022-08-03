@@ -1,6 +1,9 @@
 .imd180Image {
+  display: block;
   max-width: 80vw;
   max-height: 80vh;
+  width: auto;
+  height: auto;
 }
 
 .imd181Loader {

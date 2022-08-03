@@ -118,7 +118,7 @@ const FolderScreen = (props: AppProps) => {
 
           <CreateFolder parentId={props.id} />
 
-          <ImageModal url={props.imageUrl} />
+          <ImageModal imageData={props.imageUrl} />
 
           <div className="fsc162Scrollable">
             <FolderInfo {...folderInfo} />
