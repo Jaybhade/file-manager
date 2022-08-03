@@ -1,4 +1,5 @@
 import React from "react";
+
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 
@@ -7,7 +8,7 @@ import { NewFolderProps, NewRouteProps } from "../utils/types";
 import FolderNotFound from "../views/FolderNotFound/FolderNotFound";
 import FolderScreen from "../views/FolderScreen";
 
-function Routes(props: AppProps) {
+const Routes = (props: AppProps) => {
   const AllRoutes = () => {
     return (
       <>
@@ -32,6 +33,7 @@ function Routes(props: AppProps) {
             />
           );
         })}
+
       </>
     );
   };

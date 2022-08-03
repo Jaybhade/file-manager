@@ -1,9 +1,9 @@
-.fsc160FolderScreenParent {
+.cuf190FolderScreenParent {
     height: 100vh;
     width: 100%;
   }
   
-  .fsc161SearchBar {
+  .cuf191SearchBar {
     position: absolute;
     padding: 10px 16px;
     top: 16px;
@@ -11,39 +11,39 @@
     z-index: 100;
   }
   
-  .fsc162Scrollable {
+  .cuf192Scrollable {
     height: 90vh;
     overflow-y: scroll;
   }
   
   @media only screen and (max-width: 600px) {
-      .fsc160FolderScreenParent {
+      .cuf190FolderScreenParent {
           display: flex;
           justify-content: center;
           align-items: center;
       }
   
-      .fsc162Scrollable {
+      .cuf192Scrollable {
           margin-top: 100px;
           width: 100vh;
       }
   
-      .fsc163BottomSpace {
+      .cuf193BottomSpace {
           height: 1200px;
           width: 100px;
       }
   
-      .fsc162Scrollable {
+      .cuf192Scrollable {
           -ms-overflow-style: none; /* IE and Edge */
           scrollbar-width: none; /* Firefox */
         }
         
-      .fsc162Scrollable::-webkit-scrollbar{
+      .cuf192Scrollable::-webkit-scrollbar{
           display: none;
       }
   }
   
-  .fsc164Loader {
+  .cuf194Loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
@@ -57,7 +57,7 @@
     100% { transform: rotate(360deg); }
   }
   
-  .fsc165LoaderParent {
+  .cuf195LoaderParent {
     display: flex;
     flex: 1;
     width: 100%;
@@ -66,7 +66,7 @@
     align-items: center;
   }
   
-  .fsc166LoadImages {
+  .cuf196LoadImages {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
@@ -80,7 +80,7 @@
     100% { transform: rotate(360deg); }
   }
   
-  .fsc167LoadImagesParent {
+  .cuf197LoadImagesParent {
     display: flex;
     flex: 1;
     width: 100%;
@@ -88,13 +88,13 @@
     align-items: center;
   }
   
-  .fsc168Error {
+  .cuf198Error {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
   }
   
-  .fsc169DisplayNone {
+  .cuf199DisplayNone {
     display: none;
   }
