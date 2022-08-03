@@ -23,7 +23,7 @@ const Images = (props: AppProps) => {
       newImages = [];
       if (error.response.status === 404) {
         setErrorMessage("Images Not Found.");
-      } else if (error.response.status === 403) {
+      } else {
         setErrorMessage(error.message);
       }
     }

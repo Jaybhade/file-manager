@@ -46,7 +46,7 @@
   scrollbar-width: none; /* Firefox */
 }
 
-.search-result-path::-webkit-scrollbar {
+.src141SearchResultPath::-webkit-scrollbar {
   display: none;
 }
 
@@ -64,5 +64,9 @@
   .src138SearchInput {
     padding: 10px 0 10px 35px;
     width: 75vw;
+  }
+
+  .src141SearchResultPath {
+    max-width: 75vw;
   }
 }
