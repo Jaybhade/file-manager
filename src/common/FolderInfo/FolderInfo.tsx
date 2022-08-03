@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import "./folderInfo.css"
 
 import { hideFolderInfoModal } from '../../store/actions'
-import Modal from '../Modal'
+import Modal from '../../ui/Modal'
 
 function FolderInfo(props: any) {
   const {name, type, creator, date, subFolders} = props;

@@ -33,7 +33,7 @@ const Routes = (props: AppProps) => {
             />
           );
         })}
-
+        <Route><FolderNotFound /></Route>
       </>
     );
   };
@@ -41,10 +41,9 @@ const Routes = (props: AppProps) => {
   return (
     <Switch>
       <AllRoutes />
-      <Route path="*" component={FolderNotFound} />
     </Switch>
   );
-}
+};
 
 type AppProps = {
   folder: NewFolderProps;

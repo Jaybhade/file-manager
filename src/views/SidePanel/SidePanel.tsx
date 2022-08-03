@@ -2,7 +2,7 @@ import React, {memo} from 'react'
 import "./sidePanel.css"
 
 import { connect } from 'react-redux';
-import Accordion from '../../common/Accordion';
+import Accordion from '../../ui/Accordion';
 import { NewFolderProps } from '../../utils/types';
 
 const SidePanel = memo((props: AppProps) => {

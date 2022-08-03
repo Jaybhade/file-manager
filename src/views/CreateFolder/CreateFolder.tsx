@@ -9,7 +9,7 @@ import {
   addFolder,
   hideCreateFolderModal,
 } from "../../store/actions";
-import Modal from "../../common/Modal";
+import Modal from "../../ui/Modal";
 import ToggleTab from "../../common/ToggleTab";
 import { connect } from "react-redux";
 

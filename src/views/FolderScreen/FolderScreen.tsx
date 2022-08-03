@@ -10,13 +10,13 @@ import {
 } from "../../store/actions";
 
 import Folder from "../../common/Folder";
-import AddFolder from "../../common/AddFolder";
+import AddFolder from "../../ui/AddFolder";
 import CreateFolder from "../CreateFolder";
-import Breadcrumb from "../../common/Breadcrumb";
+import Breadcrumb from "../../ui/Breadcrumb";
 import Search from "../../common/Search";
 import FolderInfo from "../../common/FolderInfo";
 import ImageModal from "../../common/ImageModal";
-import CreateNewFolderMenu from "../../common/CreateNewFolderMenu";
+import CreateNewFolderMenu from "../../ui/CreateNewFolderMenu";
 import { NewFolderProps } from "../../utils/types";
 import CustomFolders from "../CustomFolder";
 

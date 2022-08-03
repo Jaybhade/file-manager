@@ -4,7 +4,7 @@ import "./imageModal.css";
 import { connect } from "react-redux";
 import { hideImageModal } from "../../store/actions";
 
-import Modal from "../Modal";
+import Modal from "../../ui/Modal";
 
 function ImageModal(props: AppProps) {
   const [show, setShow] = useState<boolean>(false);
