@@ -3,7 +3,7 @@ import "./folderNotFound.css";
 
 import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { NewRouteProps } from "../../utils/types";
+import { NewRouteProps, StateProps } from "../../utils/types";
 
 const FolderNotFound = (props: AppProps) => {
   const [show, setShow] = useState<boolean>(false);
@@ -40,7 +40,7 @@ type AppProps = {
   routes: Array<NewRouteProps>;
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StateProps) => {
   return { routes: state.routes };
 };
 

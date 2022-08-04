@@ -17,7 +17,7 @@ const Folder = (props: AppProps) => {
     window.addEventListener("click", handleClick);
   });
 
-  const handleContext = (event: any) => {
+  const handleContext = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
     setShowMenu(true);
     props.setFolderInfoId(props.id);

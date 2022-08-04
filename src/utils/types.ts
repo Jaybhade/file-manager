@@ -14,3 +14,21 @@ export type NewRouteProps = {
   name: string;
   url: string;
 };
+
+export type ImageUrlProps = {
+  height: number;
+  width: number;
+  placeholder: string;
+  url: string;
+}
+
+export type StateProps = {
+  createFolderModal: boolean;
+  fetchImages: Array<any>;
+  folderInfoId: string;
+  folderInfoModal: false;
+  folders: Array<NewFolderProps>;
+  imageUrl: ImageUrlProps;
+  lastVisitedUrl: string;
+  routes: Array<NewRouteProps>;
+}

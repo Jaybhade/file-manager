@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, memo } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { NewRouteProps, StateProps } from "../../utils/types";
 import "./search.css";
 
 const SearchIcon = () => {
@@ -36,9 +37,9 @@ const SearchResult = ({ name, url }: routeData) => {
 };
 
 const Search = (props: AppProps) => {
-  const [searchArray, setSearchArray] = useState<any>([]);
+  const [searchArray, setSearchArray] = useState<Array<routeData>>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [searchQueryArray, setSearchQueryArray] = useState<any>([]);
+  const [searchQueryArray, setSearchQueryArray] = useState<Array<routeData>>([]);
   const timeout = useRef<any>();
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const Search = (props: AppProps) => {
     setSearchArray([...newSearchArray]);
   }, [props.routes]);
 
-  const handleSearchQuery = (event: any) => {
+  const handleSearchQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timeout.current);
     setSearchQuery(event.target.value);
     timeout.current = setTimeout(() => {
@@ -100,7 +101,7 @@ type routeData = {
 };
 
 type AppProps = {
-  routes: any;
+  routes: Array<NewRouteProps>;
   parentUrl: string;
 };
 
@@ -110,4 +111,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(memo(Search));
+export default connect(mapStateToProps)(Search);

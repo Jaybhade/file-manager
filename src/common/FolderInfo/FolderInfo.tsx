@@ -5,8 +5,9 @@ import "./folderInfo.css"
 
 import { hideFolderInfoModal } from '../../store/actions'
 import Modal from '../../ui/Modal'
+import { NewFolderProps, StateProps } from '../../utils/types'
 
-function FolderInfo(props: any) {
+const FolderInfo = (props: any) => {
   const {name, type, creator, date, subFolders} = props;
   return (
     <Modal show={props.show} hideModal={props.hideFolderInfoModal}>
@@ -46,7 +47,13 @@ function FolderInfo(props: any) {
   )
 }
 
-const mapStateToProps = (state: any) => {
+type ExtraProps = {
+  hideFolderInfoModal: any;
+}
+
+type AppProps = NewFolderProps & ExtraProps;
+
+const mapStateToProps = (state: StateProps) => {
     return {show: state.folderInfoModal}
 }
 

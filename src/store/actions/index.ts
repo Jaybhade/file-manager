@@ -1,6 +1,6 @@
 import unsplash from "../../utils/unsplash";
 
-import { NewFolderProps, NewRouteProps } from "../../utils/types";
+import { ImageUrlProps, NewFolderProps, NewRouteProps } from "../../utils/types";
 //Action Creator
 
 export const addFolder = (folderDetails: NewFolderProps) => {
@@ -74,7 +74,7 @@ export const hideImageModal = () => {
   };
 };
 
-export const setImageUrl = (ImageData: any) => {
+export const setImageUrl = (ImageData: ImageUrlProps) => {
   return {
     type: "SET_IMAGE_URL",
     payload: ImageData,
