@@ -8,10 +8,11 @@ import Modal from "../../ui/Modal";
 
 function ImageModal(props: AppProps) {
   const [show, setShow] = useState<boolean>(false);
+  const {url, placeholder, height, width} = props.imageData;
 
   useEffect(() => {
     const img = new Image();
-    img.src = props.imageData.url;
+    img.src = url;
     img.onload = () => {
       setShow(true);
     };
@@ -19,13 +20,13 @@ function ImageModal(props: AppProps) {
     return () => {
       setShow(false)
     }
-  }, [props.imageData.url]);
+  }, [url]);
 
   return (
     <Modal show={props.show} hideModal={props.hideImageModal}>
         <img
-          src={show ? props.imageData.url : props.imageData.placeholder}
-          style={{width: 500, height: (500*props.imageData.height)/props.imageData.width}}
+          src={show ? url : placeholder}
+          style={{width: 500, height: (500*height)/width}}
           className="imd180Image"
         />
     </Modal>
